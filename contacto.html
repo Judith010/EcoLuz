@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario Extra | EcoLuz Energía</title>
+  <style>
+    :root {
+      --verde: #3E721D;
+      --azul: #63B3ED;
+      --azul-claro: #EBF8FF;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--azul-claro);
+      color: #333;
+    }
+
+    header {
+      background-color: var(--verde);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: var(--azul);
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--verde);
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2b4f15;
+    }
+
+    footer {
+      background-color: var(--verde);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-contenido {
+      background-color: white;
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .cerrar {
+      margin-top: 20px;
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cerrar:hover {
+      background-color: #2b4f15;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>EcoLuz Energía</h1>
+    <p>Energía Renovable para un Futuro Sostenible</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Servicios</a>
+    <a href="paneles.html">Paneles Solares</a>
+    <a href="casos.html">Proyectos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <section>
+    <h2>Solicita tu Cotización</h2>
+    <div class="card">
+      <form id="formCotizacion" onsubmit="return validarCotizacion()">
+        <input type="text" id="nombre" placeholder="Nombre completo" required />
+        <input type="email" id="email" placeholder="Correo electrónico" required />
+        <input type="tel" id="telefono" placeholder="Teléfono de contacto" required />
+        <select id="producto" required>
+          <option value="">Selecciona un producto</option>
+          <option value="Monocristalino">Panel Monocristalino</option>
+          <option value="Policristalino">Panel Policristalino</option>
+          <option value="Bifacial">Panel Bifacial</option>
+          <option value="Kit">Kit Solar Residencial</option>
+        </select>
+        <textarea id="comentarios" placeholder="Especificaciones o dudas..." rows="5" required></textarea>
+        <button type="submit">Solicitar</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EcoLuz Energía. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Modal de Confirmación -->
+  <div id="modalConfirmacion" class="modal">
+    <div class="modal-contenido">
+      <h3 id="mensajeModal"></h3>
+      <button class="cerrar" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    function validarCotizacion() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const producto = document.getElementById('producto').value;
+      const comentarios = document.getElementById('comentarios').value.trim();
+
+      if (!nombre || !email || !telefono || !producto || !comentarios) {
+        alert("Por favor completa todos los campos.");
+        return false;
+      }
+
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Por favor ingresa un correo válido.");
+        return false;
+      }
+
+      // Mostrar modal con mensaje
+      document.getElementById("mensajeModal").innerText =
+        `¡Gracias por tu solicitud, ${nombre}! Te contactaremos pronto para ofrecerte la mejor opción en "${producto}".`;
+
+      document.getElementById("modalConfirmacion").style.display = "block";
+
+      // Limpiar formulario
+      document.getElementById("formCotizacion").reset();
+      return false;
+    }
+
+    function cerrarModal() {
+      document.getElementById("modalConfirmacion").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("modalConfirmacion");
+      if (event.target === modal) {
+        cerrarModal();
+      }
+    }
+  </script>
+
+</body>
+</html>

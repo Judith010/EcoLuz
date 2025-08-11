@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoLuz Energía</title>
+  <style>
+    :root {
+      --verde: #3E721D;
+      --azul: #63B3ED;
+      --azul-claro: #EBF8FF;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--azul-claro);
+      color: #333;
+    }
+
+    header {
+      background-color: var(--verde);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: var(--azul);
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--verde);
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: var(--verde);
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2b4f15;
+    }
+
+    footer {
+      background-color: var(--verde);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>EcoLuz Energía</h1>
+    <p>Energía Renovable para un Futuro Sostenible</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Servicios</a>
+    <a href="paneles.html">Paneles Solares</a>
+    <a href="casos.html">Proyectos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <section id="servicios">
+    <h2>Presentación de Servicios</h2>
+    <div class="card">
+      <p>En <strong>EcoLuz Energía</strong> nos especializamos en soluciones de energía renovable para hogares, empresas e instituciones. Nuestro enfoque ecológico garantiza un impacto positivo en el medio ambiente mientras reduces tus costos energéticos.</p>
+      <ul>
+        <li>Instalación de paneles solares</li>
+        <li>Estudios de eficiencia energética</li>
+        <li>Mantenimiento y monitoreo</li>
+        <li>Asesoría en financiamiento verde</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="paneles">
+    <h2>Tipos de Paneles Solares</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Monocristalinos:</strong> Alta eficiencia y durabilidad</li>
+        <li><strong>Policristalinos:</strong> Económicos y confiables</li>
+        <li><strong>Paneles Flexibles:</strong> Ideales para superficies no convencionales</li>
+        <li><strong>Paneles Bifaciales:</strong> Captura de luz por ambos lados</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <h2>Proyectos Implementados</h2>
+    <div class="card">
+      <p>Hemos desarrollado más de 200 proyectos en distintas regiones del país:</p>
+      <ul>
+        <li>🌞 Planta solar residencial en Córdoba</li>
+        <li>🏢 Sistema empresarial en Buenos Aires con capacidad de 50 kWp</li>
+        <li>🏫 Instalación en escuela rural 100% autónoma</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Formulario de Contacto</h2>
+    <div class="card">
+      <form id="formulario" onsubmit="return validarFormulario()">
+        <input type="text" id="nombre" placeholder="Nombre completo" required />
+        <input type="email" id="email" placeholder="Correo electrónico" required />
+        <textarea id="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EcoLuz Energía. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function validarFormulario() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      if (!nombre || !email || !mensaje) {
+        alert("Por favor completa todos los campos.");
+        return false;
+      }
+
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Por favor ingresa un correo válido.");
+        return false;
+      }
+
+      alert("Gracias por contactarnos, " + nombre + ". Te responderemos pronto.");
+      return true;
+    }
+  </script>
+
+</body>
+</html>
